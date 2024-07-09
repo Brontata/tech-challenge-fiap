@@ -14,8 +14,8 @@ services:
     #    tmpfs:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
-      POSTGRES_PASSWORD: root
-      POSTGRES_USER: root
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: changeme
   api:
     build: "."
     container_name: api
@@ -24,3 +24,7 @@ services:
       - "3333:3333"
     depends_on:
       - db
+    environment:
+      JWT_SECRET: fiap
+      DB_PORT: 27017
+      DB_URI: tech-challenge.q9sch0e.mongodb.net

@@ -1,30 +1,40 @@
-version: "3.7"
 services:
   db:
-    image: postgres:12.19-bullseye
+    image: postgres:12.19
     container_name: postgres-db
     restart: always
     # set shared memory limit when using docker-compose
     shm_size: 128mb
     # or set shared memory limit when deploy via swarm stack
     volumes:
-      - ./api/db/data:/var/lib/postgres
+      - ./api/db/data:/var/lib/postgres/data
     #  - type: tmpfs
     #    target: /dev/shm
     #    tmpfs:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
+    ports:
+      - 5432:5432
     environment:
-      POSTGRES_PASSWORD: changeme
-      POSTGRES_USER: changeme
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    networks:
+      - fiap-network
+
   api:
-    build: "."
+    build:
+      dockerfile: Dockerfile
+      context: ./
     container_name: api
     restart: always
     ports:
-      - "3333:3333"
+      - 3333:3333
     depends_on:
       - db
-    environment:
-      JWT_SECRET: fiap
-      DB_PORT: 27017
-      DB_URI: tech-challenge.q9sch0e.mongodb.net
+    volumes:
+      - .:/app
+    networks:
+      - fiap-network
+
+networks:
+  fiap-network:
+    driver: bridge

@@ -1,8 +1,10 @@
-FROM node:20.12.2-buster
+FROM node:20.12.2-alpine
 
-WORKDIR /app
+WORKDIR /home/node/app
 
-COPY . /app/
+COPY package*.json ./
+
+RUN npm install
 
 ARG DB_URI
 ARG DB_PORT
@@ -16,7 +18,11 @@ RUN echo "DB_URI=${DB_URI}" > .env
 RUN echo "DB_PORT=${DB_PORT}" > .env
 RUN echo "JWT_SECRET=${JWT_SECRET}" > .env
 
+RUN apk upgrade --update-cache --available && apk add openssl
+
 EXPOSE 3333
 #ENV NODE_ENV production
-RUN npm install
+
+COPY . .
+
 CMD ["npm", "start"]

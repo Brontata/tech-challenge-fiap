@@ -5,7 +5,7 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 RUN npm install
-RUN npm run build
+RUN npx prisma generate
 
 ARG DB_URI
 ARG DB_PORT

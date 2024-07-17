@@ -5,7 +5,6 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 RUN npm install
-RUN npx prisma generate
 
 ARG DB_URI
 ARG DB_PORT
@@ -26,4 +25,4 @@ EXPOSE 3333
 
 COPY . .
 
-CMD ["npm", "start"]
+CMD source build.sh

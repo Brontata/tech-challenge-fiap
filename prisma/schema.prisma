@@ -25,12 +25,18 @@ model Posts {
 model User {
   id Int @id @default(autoincrement())
   name String
-  email String
+  email String @unique
   password String
+  role Role 
   is_admin Boolean @default(false)
   posts Posts[]
   created_at DateTime @default(now())
   updated_at DateTime?
 
   @@map("users")
+}
+
+enum Role {
+  PROFESSOR
+  ALUNO
 }

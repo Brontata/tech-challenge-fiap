@@ -1,4 +1,6 @@
 const express = require('express');
+const protect = require('../middleware/authMiddleware');
+const checkRole = require('../middleware/checkRole');
 const listAllPosts = require('../controllers/Posts/ListAllPosts');
 const findPostById = require('../controllers/Posts/FindPostById');
 const createPost = require('../controllers/Posts/CreatePost');
@@ -9,9 +11,20 @@ const router = express.Router();
 
 router.get('/', listAllPosts.handle);
 router.get('/:id', findPostById.handle);
-router.post('/', createPost.handle);
-router.put('/:id', updatePost.handle);
-router.delete('/:id', deletePost.handle);
+//router.post('/', createPost.handle);
+router.post('/create', protect, checkRole(['PROFESSOR']), (req, res) => {
+    createPost.handle(req, res);
+});
+//router.put('/:id', updatePost.handle);
+router.post('/:id', protect, checkRole(['PROFESSOR']), (req, res) => {
+    updatePost.handle(req, res);
+});
+
+//router.delete('/:id', deletePost.handle);
+router.post('/:id', protect, checkRole(['PROFESSOR']), (req, res) => {
+    deletePost.handle(req, res);
+});
+
 router.get('/search', searchPost.handle);
 
 module.exports = router;

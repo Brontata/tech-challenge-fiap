@@ -20,7 +20,6 @@ describe('CreatePostUseCase', () => {
 
         postRepository.create.mockResolvedValue({ success: true });
         
-        
         // Act
         const result = await CreatePostUseCase.execute(postData);
         // Assert
@@ -42,6 +41,8 @@ describe('CreatePostUseCase', () => {
         
         // Assert
         expect(result).toEqual({ error: errorMessage });
-        expect(postRepository.create).toHaveBeenCalledWith(postData);
+        expect(postRepository.create).toHaveBeenCalledWith({...postData,slug:'title'});
     });
+
+   
 });

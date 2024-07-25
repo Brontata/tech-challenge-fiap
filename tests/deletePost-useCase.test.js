@@ -28,7 +28,6 @@ describe('DeletePostUseCase', () => {
         const postId = 1;
         const errorMessage = 'Failed to delete';
         postRepository.delete.mockRejectedValue(new Error(errorMessage));
-        
         // Act
         const result = await DeletePostUseCase.execute(postId);
         

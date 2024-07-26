@@ -16,12 +16,12 @@ router.post('/create', protect, checkRole(['PROFESSOR']), (req, res) => {
     createPost.handle(req, res);
 });
 //router.put('/:id', updatePost.handle);
-router.post('/:id', protect, checkRole(['PROFESSOR']), (req, res) => {
+router.put('/:id', protect, checkRole(['PROFESSOR']), (req, res) => {
     updatePost.handle(req, res);
 });
 
 //router.delete('/:id', deletePost.handle);
-router.post('/:id', protect, checkRole(['PROFESSOR']), (req, res) => {
+router.delete('/:id', protect, checkRole(['PROFESSOR']), (req, res) => {
     deletePost.handle(req, res);
 });
 

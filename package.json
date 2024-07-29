@@ -9,7 +9,7 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "coverageReporters": ["text-summary", "json-summary", "html"],
+    "coverageReporters": ["text", "json-summary", "html"],
     "collectCoverage": true,
     "collectCoverageFrom": ["src/**/*.js"],
     "coverageThreshold": {

@@ -6,7 +6,7 @@ on:
       - opened
       - synchronize
     branches:
-      - develop
+      - main
 
 jobs:
   run-tests:

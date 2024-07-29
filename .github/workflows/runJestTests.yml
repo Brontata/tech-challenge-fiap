@@ -18,10 +18,3 @@ jobs:
         run: npm install
       - name: Run tests
         run: npm run test
-      - name: Check coverage
-        id: coverage
-        uses: ActionsTools/read-json-action@main
-        with:
-          file_path: "/coverage/coverage-summary.json"
-      - run: |
-          echo ${{steps.coverage.total.lines.pct}}

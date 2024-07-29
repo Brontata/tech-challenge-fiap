@@ -1,0 +1,33 @@
+name: Build and Push Docker Image
+
+on:
+  pull_request: 
+    types:
+      - closed
+    branches:
+      - main
+  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+    steps:
+      - name: Checkout Repository
+        if: ${{ github.event.pull_request.merged }}
+        uses: actions/checkout@v4
+
+      - name: Build and Push Docker Image
+        if: ${{ github.event.pull_request.merged }}
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker build -t $DOCKER_USERNAME/tech-challenge-node:latest --build-arg DB_URI=${{ secrets.DATABASE_URL }} --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} .
+          docker push $DOCKER_USERNAME/tech-challenge-node:latest
+      - name: Deploy in Render
+        if: ${{ github.event.pull_request.merged }}
+        run: |
+          curl --REQUEST GET ${{ secrets.RENDER_DEPLOY_HOOK }} -v

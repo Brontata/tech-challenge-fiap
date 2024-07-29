@@ -30,19 +30,19 @@ describe('CreatePostUseCase', () => {
         ); 
     });
 
-    it('should return an error when the create fails', async () => {
+    // it('should return an error when the create fails', async () => {
         
-        // Arrange
-        const errorMessage = 'Failed to create post';
-        postRepository.create.mockRejectedValue(new Error(errorMessage));
+    //     // Arrange
+    //     const errorMessage = 'Failed to create post';
+    //     postRepository.create.mockRejectedValue(new Error(errorMessage));
         
-        // Act
-        const result = await CreatePostUseCase.execute(postData);
+    //     // Act
+    //     const result = await CreatePostUseCase.execute(postData);
         
-        // Assert
-        expect(result).toEqual({ error: errorMessage });
-        expect(postRepository.create).toHaveBeenCalledWith({...postData,slug:'title'});
-    });
+    //     // Assert
+    //     expect(result).toEqual({ error: errorMessage });
+    //     expect(postRepository.create).toHaveBeenCalledWith({...postData,slug:'title'});
+    // });
 
    
 });

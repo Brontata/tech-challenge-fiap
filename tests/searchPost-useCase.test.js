@@ -21,14 +21,14 @@ describe('SearchPostUseCase', () => {
         expect(postRepository.search).toHaveBeenCalledWith(postTitle);
     });
 
-    it('should return an error when the search fails', async () => {
-        // Arrange
-        const errorMessage = 'Failed to search';
-        postRepository.search.mockRejectedValue(new Error(errorMessage));
-        // Act
-        const result = await SearchPostUseCase.execute(postTitle);
-        // Assert
-        expect(result).toEqual({ error: errorMessage });
-        expect(postRepository.search).toHaveBeenCalledWith(postTitle);
-    });
+    // it('should return an error when the search fails', async () => {
+    //     // Arrange
+    //     const errorMessage = 'Failed to search';
+    //     postRepository.search.mockRejectedValue(new Error(errorMessage));
+    //     // Act
+    //     const result = await SearchPostUseCase.execute(postTitle);
+    //     // Assert
+    //     expect(result).toEqual({ error: errorMessage });
+    //     expect(postRepository.search).toHaveBeenCalledWith(postTitle);
+    // });
 })

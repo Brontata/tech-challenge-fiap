@@ -27,7 +27,9 @@
     "express": "~4.16.1",
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^5.16.2"
+    "prisma": "^5.16.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.6.0",

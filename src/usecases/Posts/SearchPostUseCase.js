@@ -6,6 +6,7 @@ class searchPostUseCase {
         }catch(error){
             return { error: error.message };
         }
+    }
 }
 
 module.exports = new searchPostUseCase();

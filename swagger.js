@@ -19,6 +19,15 @@ const options = {
         description: 'Production live server'
       },
     ],
+    components: {
+      securitySchemes:[{
+        bearerAuth:{
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        }
+      }]
+    },
   },
   apis: ['./src/routes/*.js'], 
 };

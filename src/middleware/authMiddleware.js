@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const secret = process.env.JWT_SECRET;
 
 const protect = (req, res, next) => {
   let token;
@@ -6,7 +7,7 @@ const protect = (req, res, next) => {
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
       token = req.headers.authorization.split(' ')[1];
-      const decoded = jwt.verify(token, 'secretKey');
+      const decoded = jwt.verify(token, secret);
       req.user = decoded;
       next();
     } catch (error) {

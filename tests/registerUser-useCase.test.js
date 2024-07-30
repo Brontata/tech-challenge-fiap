@@ -1,3 +1,4 @@
+require('dotenv/config');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const prisma = require('../src/database');
@@ -24,6 +25,7 @@ describe('RegisterUserUseCase', () => {
     bcrypt.hash.mockResolvedValue('hashedPassword');
     prisma.user.create.mockResolvedValue(mockUser);
     jwt.sign.mockReturnValue('fakeToken');
+    const secret = process.env.JWT_SECRET;
 
     const result = await RegisterUserUseCase.execute({ name: 'Test User', email: 'test@example.com', password: 'password', role: 'user' });
 
@@ -33,7 +35,7 @@ describe('RegisterUserUseCase', () => {
     expect(prisma.user.create).toHaveBeenCalledWith({
       data: { name: 'Test User', email: 'test@example.com', password: 'hashedPassword', role: 'user' },
     });
-    expect(jwt.sign).toHaveBeenCalledWith({ id: mockUser.id, role: mockUser.role }, 'secretKey', { expiresIn: '1h' });
+    expect(jwt.sign).toHaveBeenCalledWith({ id: mockUser.id, role: mockUser.role }, secret, { expiresIn: '1h' });
   });
 
   it('should throw an error when email is already registered', async () => {

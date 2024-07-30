@@ -6,16 +6,13 @@ COPY package*.json ./
 
 RUN npm install
 
-ARG DB_URI
-ARG DB_PORT
+ARG DATABASE_URL
 ARG JWT_SECRET
 
-ENV DB_URI=$DB_URI
-ENV DB_PORT=$DB_PORT
-ENV JWT_SECRET=$JWT_SECRET
+#ENV DATABASE_URL=$DATABASE_URL
+#ENV JWT_SECRET=$JWT_SECRET
 
-RUN echo "DB_URI=${DB_URI}" > .env
-RUN echo "DB_PORT=${DB_PORT}" > .env
+RUN echo "DATABASE_URL=${DATABASE_URL}" > .env
 RUN echo "JWT_SECRET=${JWT_SECRET}" > .env
 
 RUN apk upgrade --update-cache --available && apk add openssl
@@ -25,4 +22,7 @@ EXPOSE 3333
 
 COPY . .
 
-CMD source build.sh
+#RUN npx prisma generate && npx prisma db push
+
+CMD ["npm", "run", "build"]
+#ENTRYPOINT [  "prisma", "generate", "&&", "prisma", "db", "push" ]

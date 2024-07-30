@@ -10,6 +10,60 @@ const searchPost = require('../controllers/Posts/SearchPost');
 const router = express.Router();
 
 
+
+/**
+ * @swagger
+ * /posts/search:
+ *   get:
+ *     summary: Search for posts
+ *     tags:
+ *       - Posts
+ *     parameters:
+ *       - in: query
+ *         name: q
+ *         schema:
+ *           type: string
+ *         description: The search query
+ *     responses:
+ *       200:
+ *         description: A list of posts that match the search query
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     description: The post ID.
+ *                     example: 1
+ *                   title:
+ *                     type: string
+ *                     description: The post title.
+ *                     example: My first post
+ *                   description:
+ *                     type: string
+ *                     description: The post description.
+ *                     example: This is the description of the post
+ *                   slug:
+ *                     type: string
+ *                     description: The post slug.
+ *                     example: my-first-post
+ *                   created_at:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The creation date of the post.
+ *                     example: 2024-07-01T00:00:00.000Z
+ *                   updated_at:
+ *                     type: string
+ *                     format: date-time
+ *                     description: The last update date of the post.
+ *                     example: 2024-07-02T00:00:00.000Z
+ */
+
+router.get('/search', searchPost.handle);
+
 /**
  * @swagger
  * /posts:
@@ -265,57 +319,5 @@ router.delete('/:id', protect, checkRole(['PROFESSOR']), (req, res) => {
     deletePost.handle(req, res);
 });
 
-/**
- * @swagger
- * /posts/search:
- *   get:
- *     summary: Search for posts
- *     tags:
- *       - Posts
- *     parameters:
- *       - in: query
- *         name: q
- *         schema:
- *           type: string
- *         description: The search query
- *     responses:
- *       200:
- *         description: A list of posts that match the search query
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     description: The post ID.
- *                     example: 1
- *                   title:
- *                     type: string
- *                     description: The post title.
- *                     example: My first post
- *                   description:
- *                     type: string
- *                     description: The post description.
- *                     example: This is the description of the post
- *                   slug:
- *                     type: string
- *                     description: The post slug.
- *                     example: my-first-post
- *                   created_at:
- *                     type: string
- *                     format: date-time
- *                     description: The creation date of the post.
- *                     example: 2024-07-01T00:00:00.000Z
- *                   updated_at:
- *                     type: string
- *                     format: date-time
- *                     description: The last update date of the post.
- *                     example: 2024-07-02T00:00:00.000Z
- */
-
-router.get('/search', searchPost.handle);
 
 module.exports = router;

@@ -5,13 +5,18 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Minha API',
+      title: 'Tech Challenge Fiap - EJMG',
       version: '1.0.0',
       description: 'Documentação da API usando Swagger',
     },
     servers: [
       {
         url: 'http://localhost:3333',
+        description: 'Localhost'
+      },
+      {
+        url: 'https://tech-challenge-node-latest.onrender.com',
+        description: 'Production live server'
       },
     ],
   },

@@ -9,11 +9,11 @@ RUN npm install
 ARG DATABASE_URL
 ARG JWT_SECRET
 
-#ENV DATABASE_URL=$DATABASE_URL
-#ENV JWT_SECRET=$JWT_SECRET
+ENV DATABASE_URL=$DATABASE_URL
+ENV JWT_SECRET=$JWT_SECRET
 
-RUN echo "DATABASE_URL=${DATABASE_URL}" > .env
-RUN echo "JWT_SECRET=${JWT_SECRET}" > .env
+RUN echo "DATABASE_URL=${DATABASE_URL}" >> .env
+RUN echo "JWT_SECRET=${JWT_SECRET}" >> .env
 
 RUN apk upgrade --update-cache --available && apk add openssl
 

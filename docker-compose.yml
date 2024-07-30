@@ -32,7 +32,7 @@ services:
     depends_on:
       - db
     volumes:
-      - .:/app
+      - .:/home/node/app
     networks:
       - fiap-network
     env_file:

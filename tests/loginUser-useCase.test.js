@@ -1,3 +1,4 @@
+require('dotenv/config');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const prisma = require('../src/database');
@@ -18,6 +19,7 @@ describe('LoginUserUseCase', () => {
 
   it('should return a token when login is successful', async () => {
     const mockUser = { id: 1, email: 'test@example.com', password: 'hashedPassword', role: 'user' };
+    const secret = process.env.JWT_SECRET;
     prisma.user.findUnique.mockResolvedValue(mockUser);
     bcrypt.compare.mockResolvedValue(true);
     jwt.sign.mockReturnValue('fakeToken');
@@ -27,7 +29,7 @@ describe('LoginUserUseCase', () => {
     expect(result).toBe('fakeToken');
     expect(prisma.user.findUnique).toHaveBeenCalledWith({ where: { email: 'test@example.com' } });
     expect(bcrypt.compare).toHaveBeenCalledWith('password', 'hashedPassword');
-    expect(jwt.sign).toHaveBeenCalledWith({ id: mockUser.id, role: mockUser.role }, 'secretKey', { expiresIn: '1h' });
+    expect(jwt.sign).toHaveBeenCalledWith({ id: mockUser.id, role: mockUser.role }, secret, { expiresIn: '1h' });
   });
 
   it('should throw an error when user is not found', async () => {

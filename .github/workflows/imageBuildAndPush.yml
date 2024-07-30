@@ -25,7 +25,7 @@ jobs:
         if: ${{ github.event.pull_request.merged }}
         run: |
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker build -t $DOCKER_USERNAME/tech-challenge-node:latest --build-arg DB_URI=${{ secrets.DATABASE_URL }} --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} .
+          docker build -t $DOCKER_USERNAME/tech-challenge-node:latest --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} .
           docker push $DOCKER_USERNAME/tech-challenge-node:latest
       - name: Deploy in Render
         if: ${{ github.event.pull_request.merged }}

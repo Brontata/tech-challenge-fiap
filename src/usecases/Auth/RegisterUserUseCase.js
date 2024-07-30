@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const prisma = require('../../database');
+const secret = process.env.JWT_SECRET;
 
 class RegisterUserUseCase {
   async execute({ name, email, password, role }) {
@@ -14,7 +15,7 @@ class RegisterUserUseCase {
     const user = await prisma.user.create({
       data: { name, email, password: hashedPassword, role },
     });
-    const token = jwt.sign({ id: user.id, role: user.role }, 'secretKey', { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id, role: user.role }, secret, { expiresIn: '1h' });
     return token;
   }
 }

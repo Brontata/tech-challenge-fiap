@@ -24,6 +24,7 @@ const router = express.Router();
  *         schema:
  *           type: string
  *         description: The search query
+ *     security: [{ bearerAuth: [] }]
  *     responses:
  *       200:
  *         description: A list of posts that match the search query
@@ -124,6 +125,7 @@ router.get('/', listAllPosts.handle);
  *         schema:
  *           type: integer
  *         description: The post ID
+ *     security: [{ bearerAuth: [] }]
  *     responses:
  *       200:
  *         description: A single post
@@ -171,8 +173,7 @@ router.get('/:id', findPostById.handle);
  *     summary: Create a new post
  *     tags:
  *       - Posts
- *     security:
- *       - bearerAuth: []
+ *     security: [{ bearerAuth: [] }]
  *     requestBody:
  *       required: true
  *       content:
@@ -246,8 +247,7 @@ router.post('/create', protect, checkRole(['PROFESSOR']), (req, res) => {
  *     summary: Update a post by ID
  *     tags:
  *       - Posts
- *     security:
- *       - bearerAuth: []
+ *     security: [{ bearerAuth: [] }]
  *     parameters:
  *       - in: path
  *         name: id

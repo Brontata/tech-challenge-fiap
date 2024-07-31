@@ -20,13 +20,20 @@ const options = {
       },
     ],
     components: {
-      securitySchemes:[{
-        bearerAuth:{
+      securitySchemes: {
+        bearerAuth: {
           type: 'http',
           scheme: 'bearer',
-          bearerFormat: 'JWT'
         }
-      }]
+      }
+    },
+    securityDefinitions: {
+      bearerAuth: {
+        type: 'apiKey',
+        name: 'Authorization',
+        scheme: 'bearer',
+        in: 'header',
+      }
     },
   },
   apis: ['./src/routes/*.js'], 

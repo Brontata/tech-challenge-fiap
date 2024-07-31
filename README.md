@@ -21,15 +21,19 @@ Siga os passos abaixo para instalar e configurar o projeto localmente utilizando
 
 2. Navegue até o diretório do projeto:
 
+    ```sh
     cd seu-repositorio
 
 3. Configure um arquivo chamado .env com as seguintes variáveis na raiz do projeto (como no arquivo .env.example):
+
+    ```sh
     DATABASE_URL="INSIRA AQUI O URL DO BANCO DE DADOS"
     JWT_SECRET="INSIRA AQUI A SECRET UTILIZADA PELO JWT"
     PORT=3333
 
 4. Inicie o comando docker compose, caso queira que o terminal mostre os logs sempre, não passe o parâmetro '-d':
 
+    ```sh
     docker compose up -d
 
 5. Abra o contrato swagger para conferir todos endpoints e métodos da API
@@ -58,6 +62,7 @@ Para realizar o deploy para ambiente produtivo devemos seguir o seguintes passos
 6. Com o merge feito, uma esteira se responsabilizará por criar uma imagem Docker a partir dos arquivos do projeto, subir para o DockerHub e comunicar o servidor que existe uma nova versão disponível, disparando um novo deploy em produção!
 
 URL Produção: <https://tech-challenge-node-latest.onrender.com>
+
 Contrato Swagger: <https://tech-challenge-node-latest.onrender.com/api-docs>
 
 ## Uso

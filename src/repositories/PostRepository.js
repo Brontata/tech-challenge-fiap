@@ -47,9 +47,14 @@ class PostRepository {
     async search(q) {
         return await prismaClient.posts.findMany({
             where: {
-                title: {
-                    contains: q
-                }
+                AND: [
+                    { 
+                        OR: [
+                            { title: { contains: q } },
+                            { description: { contains: q } },
+                        ]
+                    }
+                ]
             }
         });
     }

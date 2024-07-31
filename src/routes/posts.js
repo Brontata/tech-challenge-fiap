@@ -24,7 +24,6 @@ const router = express.Router();
  *         schema:
  *           type: string
  *         description: The search query
- *     security: [{ bearerAuth: [] }]
  *     responses:
  *       200:
  *         description: A list of posts that match the search query
@@ -125,7 +124,6 @@ router.get('/', listAllPosts.handle);
  *         schema:
  *           type: integer
  *         description: The post ID
- *     security: [{ bearerAuth: [] }]
  *     responses:
  *       200:
  *         description: A single post

@@ -7,7 +7,7 @@ const options = {
     info: {
       title: 'Tech Challenge Fiap - EJMG',
       version: '1.0.0',
-      description: 'Documentação da API usando Swagger',
+      description: 'Documentação da API usando Swagger e Node!',
     },
     servers: [
       {

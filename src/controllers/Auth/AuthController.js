@@ -29,8 +29,8 @@ class AuthController {
     const { email, password } = req.body;
 
     try {
-      const token = await LoginUserUseCase.execute({ email, password });
-      res.status(200).json({ token });
+      const {token, role } = await LoginUserUseCase.execute({ email, password });
+      res.status(200).json({ token, role  });
     } catch (error) {
       console.error('Erro ao registrar usuário:', error);
       res.status(401).json({ error: ' senha inválidos', details: error.message });

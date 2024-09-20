@@ -15,7 +15,7 @@ class LoginUserUseCase {
       throw new Error('E-mail ou senha inválidos');
     }
     const token = jwt.sign({ id: user.id, role: user.role }, secret, { expiresIn: '1h' });
-    return token;
+    return {token, role: user.role};
   }
 }
 

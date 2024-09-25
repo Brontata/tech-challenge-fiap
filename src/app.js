@@ -1,6 +1,7 @@
 const express = require('express');
 const postRoutes = require('./routes/posts');
 const userRoutes = require('./routes/users');
+const cors = require('cors');
 class App {
     constructor() {
         this.app = express();
@@ -9,6 +10,7 @@ class App {
     }
 
     middlewares() {
+        this.app.use(cors());
         this.app.use(express.json());
     }
 

@@ -14,7 +14,7 @@ class LoginUserUseCase {
     if (!passwordMatch) {
       throw new Error('E-mail ou senha inválidos');
     }
-    const token = jwt.sign({ id: user.id, role: user.role }, secret, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id, role: user.role, name: user.name }, secret, { expiresIn: '1h' });
     return {token, role: user.role};
   }
 }

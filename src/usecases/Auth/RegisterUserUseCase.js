@@ -15,7 +15,7 @@ class RegisterUserUseCase {
     const user = await prisma.user.create({
       data: { name, email, password: hashedPassword, role },
     });
-    const token = jwt.sign({ id: user.id, role: user.role }, secret, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id, role: user.role, name: user.name }, secret, { expiresIn: '1h' });
     return token;
   }
 }

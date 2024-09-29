@@ -15,7 +15,7 @@ model Posts {
   description String
   slug String
   created_at DateTime @default(now())
-  updated_at DateTime?
+  updated_at DateTime? @default(now())
 
   user User? @relation(fields: [user_id], references: [id])
 

@@ -23,7 +23,7 @@ class PostRepository {
         });
     }
 
-    async update({ id, title, description , slug}) {
+    async update({ id, title, description , slug, updated_at }) {
         return await prismaClient.posts.update({
             where: {
                 id: Number(id),
@@ -31,7 +31,8 @@ class PostRepository {
             data: {
                 title,
                 description,
-                slug
+                slug,
+                updated_at
             }
         });
     }

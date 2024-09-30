@@ -22,9 +22,7 @@ services:
       - fiap-network
 
   api:
-    build:
-      dockerfile: Dockerfile
-      context: ./
+    build: .
     container_name: api
     restart: always
     ports:

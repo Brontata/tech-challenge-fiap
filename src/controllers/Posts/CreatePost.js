@@ -1,10 +1,14 @@
 const createPostsUseCase = require('../../usecases/Posts/CreatePostUseCase');
 class CreatePost {
     async handle(request, response) {
-        const user_id = request.user.id;
-        const { title, description } = request.body;
-        const post = await createPostsUseCase.execute({ title, description, user_id });
-        return response.json(post);
+        try {
+            const user_id = request.user.id;
+            const { title, description, author } = request.body;
+            const post = await createPostsUseCase.execute({ title, description, author, user_id });
+            return response.json(post);
+        } catch (error) {
+            return response.status(400).json({ error: error.message });
+        }
     }
 }
 

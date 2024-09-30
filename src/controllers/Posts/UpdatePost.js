@@ -1,10 +1,14 @@
 const updatePostUseCase = require('../../usecases/Posts/UpdatePostUseCase');
 class UpdatePost {
     async handle(request, response) {
-        const { id } = request.params;
-        const { title, description } = request.body;
-        const post = await updatePostUseCase.execute({ id, title, description });
-        return response.json(post);
+        try {
+            const { id } = request.params;
+            const { title, description, author } = request.body;
+            const post = await updatePostUseCase.execute({ id, title, description, author });
+            return response.json(post);
+        } catch (error) {
+            return response.status(400).json({ error: error.message });
+        }
     }
 }
 

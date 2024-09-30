@@ -12,18 +12,19 @@ class PostRepository {
         });
     }
 
-    async create({ title, description, user_id, slug }) {
+    async create({ title, description, author, user_id, slug }) {
         return await prismaClient.posts.create({
             data: {
                 title,
                 description,
+                author,
                 user_id,
                 slug
             }
         });
     }
 
-    async update({ id, title, description , slug, updated_at }) {
+    async update({ id, title, description, author, slug, updated_at }) {
         return await prismaClient.posts.update({
             where: {
                 id: Number(id),
@@ -31,6 +32,7 @@ class PostRepository {
             data: {
                 title,
                 description,
+                author,
                 slug,
                 updated_at
             }

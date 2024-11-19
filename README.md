@@ -1,4 +1,4 @@
-# Tech challenge 
+# Tech Challenge 
 
 O projeto tem como intuito a criação, edição, exclusão e visualização de posts baseados em uma aplicação escolar.
 

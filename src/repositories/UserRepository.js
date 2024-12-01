@@ -24,6 +24,7 @@ class UserRepository {
     }
 
     async update({ id, name, email, password, role, updated_at }) {
+        console.log('hashedPassword', password);
         return await prismaClient.user.update({
             where: {
                 id: Number(id),

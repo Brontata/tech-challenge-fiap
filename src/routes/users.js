@@ -1,6 +1,13 @@
 const express = require('express');
 const { check } = require('express-validator');
+const protect = require('../middleware/authMiddleware');
+const checkRole = require('../middleware/checkRole');
 const AuthController = require('../controllers/Auth/AuthController');
+const ListUsersByRole = require('../controllers/Users/ListUsersByRole');
+const ListAllUsers = require('../controllers/Users/ListAllUsers');
+const DeleteUser = require('../controllers/Users/DeleteUser');
+const UpdateUser = require('../controllers/Users/UpdateUser');
+const { route } = require('./posts');
 
 const router = express.Router();
 
@@ -151,5 +158,25 @@ router.post(
   ],
   (req, res) => AuthController.login(req, res)
 );
+
+router.get(
+  '/role/:role', protect, checkRole(['PROFESSOR']),
+  (req, res) => ListUsersByRole.handle(req, res)
+)
+
+router.get(
+  '/', protect, checkRole(['PROFESSOR']),
+  (req, res) => ListAllUsers.handle(req, res)
+)
+
+router.delete(
+  '/:id', protect, checkRole(['PROFESSOR']),
+  (req, res) => DeleteUser.handle(req, res)
+)
+
+router.put(
+  '/:id', protect, checkRole(['PROFESSOR']),
+  (req, res) => UpdateUser.handle(req, res)
+)
 
 module.exports = router;

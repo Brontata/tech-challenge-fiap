@@ -9,8 +9,8 @@ class UpdateUserUseCase {
         if (existingUser && existingUser.id !== Number(id)) {
           throw new Error('E-mail já cadastrado em outro usuário');
         }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
+        
+        const hashedPassword = password ? await bcrypt.hash(password, 10) : existingUser.password;
         try {
             return await userRepository.update({ id, name, email, password: hashedPassword, role, updated_at: new Date() });
         } catch (error) {
